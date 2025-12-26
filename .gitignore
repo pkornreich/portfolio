@@ -1,0 +1,11 @@
+.ipynb_checkpoints
+.venv
+__pycache__
+.python-version
+uv.lock
+coinmaven/**
+ratings/**
+resumeanalyzer/**
+sales/**
+schedule-optimization/**
+story-generator/**
