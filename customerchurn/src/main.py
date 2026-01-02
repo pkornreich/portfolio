@@ -1,9 +1,11 @@
 # BS"D
 import sys
 import argparse
+import logging
 
 from rich import print
 
+from util.logging import Logger
 from data.datasource import DataService
 from models.modelobjects import ModelData
 from models.modelobjects import MetaModel
@@ -60,7 +62,8 @@ def find_best_model():
 
     best_index: int = ModelComparator.get_best_result(all_results)
     best_result: ModelResult = all_results[best_index]
-    print(f'Model: {best_result.model_name}, Data: {best_result.data_description}')
+    logger = Logger.get_logger()
+    logger.log(logging.INFO, f'Model: {best_result.model_name}, Data: {best_result.data_description}')
     result_log.save_best_model(best_result)
 
 def predict(file_name: str):

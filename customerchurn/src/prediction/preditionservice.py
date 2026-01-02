@@ -12,14 +12,12 @@ class PredictionService:
     @staticmethod
     def find_and_fix(ds: DataService):
         df: DataFrame = ds.get_raw()
-        print(df)
         dv: DataFrame = ds.read_default_values()
         column_names = list(dv.columns)
         for name in column_names:
             if (not name in list(df.columns)) or (df[name] is None) or (len(str(df[name])) == 0):
                 df[name] = dv[name]
         ds.set_raw(df)
-        print(df)
 
     @staticmethod
     def predict(file_name: str) -> str:

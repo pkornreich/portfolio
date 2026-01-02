@@ -1,5 +1,7 @@
 # BS"D
 
+import logging
+
 import pandas as pd
 from pandas import DataFrame #, Series
 from sklearn.base import TransformerMixin
@@ -7,6 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.compose import ColumnTransformer
 
 from constants import Constants
+from util.logging import Logger
 from models.modelobjects import ModelData
 from data.datamanager import DataManager
 
@@ -105,7 +108,8 @@ class DataService:
             non_null_count = self.df['TotalCharges'].count()
             message = f" Percentage of Null Total Charges Values: {round(null_count*100/(non_null_count + null_count), 2)}%"
             # Shows non-null count is < 1%
-            print(message) 
+            logger = Logger.get_logger()
+            logger.log(logging.INFO, message)
             # So, can drop them
             self.df.dropna(subset=['TotalCharges'], inplace=True)
         

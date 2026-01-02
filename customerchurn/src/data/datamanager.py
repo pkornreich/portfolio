@@ -7,7 +7,6 @@ class DataManager():
     @staticmethod
     def is_running_from_src():
         cwd = Path.cwd()
-        print(f"Current Working Directory (CWD): {cwd}")
         # Check if the current working directory ends with a 'src' segment
         return cwd.name == 'src'
 

@@ -1,5 +1,7 @@
 # BS"D
 
+import logging
+
 import numpy as np
 
 from sklearn.model_selection import train_test_split
@@ -10,13 +12,12 @@ from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.model_selection import GridSearchCV
 from sklearn import set_config
 
+from util.logging import Logger
 from models.modelobjects import MetaModel
 from models.modelobjects import ModelData
 from models.modelobjects import ModelResult
 
 from data.datapipelineprovider import DataPipelineProvider
-
-from rich import print
 
 class ModelAnalyzer:
 
@@ -54,11 +55,11 @@ class ModelAnalyzer:
         
         # model.fit(X_train, y_train)
         grid_search.fit(X_train, y_train)
-        # print("Results: ")
-        # print(grid_search.cv_results_)
-        # print(model_meta.name)
-        # print("Best score: %f" % grid_search.best_score_)
-        # print("Best parameters:", grid_search.best_params_)
+        # logger.log(logging.INFO, ("Results: ")
+        # logger.log(logging.INFO, (grid_search.cv_results_)
+        # logger.log(logging.INFO, (model_meta.name)
+        # logger.log(logging.INFO, ("Best score: %f" % grid_search.best_score_)
+        # logger.log(logging.INFO, ("Best parameters:", grid_search.best_params_)
 
         # The best estimator is available as an attribute and can be used for predictions
         best_model = grid_search.best_estimator_

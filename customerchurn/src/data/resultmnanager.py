@@ -1,11 +1,14 @@
 # BS"D
 
+import logging
+
 import csv
 import json
 import pickle
 from pathlib import Path
 
 from constants import Constants
+from util.logging import Logger
 from models.modelobjects import ModelResult
 from data.datamanager import DataManager
 
@@ -21,19 +24,20 @@ class ResultManager:
     
     @staticmethod
     def display_result(result: ModelResult, data_description: str):
-        print('-----------------------------------------')
-        print('Results for ' + result.model_name)
-        print('------------------------------------------')
+        logger = Logger.get_logger()
+        logger.log(logging.INFO, '-----------------------------------------')
+        logger.log(logging.INFO, 'Results for ' + result.model_name)
+        logger.log(logging.INFO, '------------------------------------------')
         
-        print(f"Average Precision with CV: {result.precision_cv:.4f}")
-        print('------------------------------------------')
-        print('Confusion Matrix')
-        print(result.cm)
+        logger.log(logging.INFO, f"Average Precision with CV: {result.precision_cv:.4f}")
+        logger.log(logging.INFO, '------------------------------------------')
+        logger.log(logging.INFO, 'Confusion Matrix')
+        logger.log(logging.INFO, result.cm)
 
-        print(f"Accuracy: {result.accuracy}")
-        print(f"Precision (positive class): {result.precision_pos}")
-        print(f"Recall (positive class): {result.recall_pos}")
-        print(f"F1-Score (positive class): {result.f1_pos}")
+        logger.log(logging.INFO, f"Accuracy: {result.accuracy}")
+        logger.log(logging.INFO, f"Precision (positive class): {result.precision_pos}")
+        logger.log(logging.INFO, f"Recall (positive class): {result.recall_pos}")
+        logger.log(logging.INFO, f"F1-Score (positive class): {result.f1_pos}")
 
     def save_results(self, results: ModelResult):
         results_file = Constants.LOG_PATH + results.model_name.replace(' ', '') + '.json'
